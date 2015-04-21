@@ -1,0 +1,187 @@
+{
+	"hasDrivetrain": "yes",
+	"drivetrain": {
+		"mcType": "talon",
+		"controllers": [
+			{
+				"name": "frontLeft",
+				"port": 0,
+				"type": "talon"
+			},
+			{
+				"name": "rearLeft",
+				"port": 1,
+				"type": "talon"
+			},
+			{
+				"name": "frontRight",
+				"port": 2,
+				"type": "talon"
+			},
+			{
+				"name": "rearRight",
+				"port": 3,
+				"type": "talon"
+			}
+		],
+		"numMotors": "4",
+		"type": "arcade",
+		"subsystem": "sub2"
+	},
+	"controllers": [
+		{
+			"name": "motor1",
+			"port": "4",
+			"type": "victor",
+			"subsystem": "Drivetrain"
+		},
+		{
+			"name": "motor2",
+			"port": "5",
+			"type": "talon",
+			"subsystem": "sub2"
+		},
+		{
+			"name": "motor3",
+			"port": "6",
+			"type": "jaguar",
+			"subsystem": "Drivetrain"
+		},
+		{
+			"name": "motor4",
+			"port": "7",
+			"type": "talonsrx",
+			"subsystem": "sub2"
+		},
+		{
+			"name": "motor5",
+			"port": "8",
+			"type": "victorsp",
+			"subsystem": "Drivetrain"
+		}
+	],
+	"solenoids": [
+		{
+			"name": "sol1",
+			"port": "0",
+			"type": "single",
+			"subsystem": "sub2"
+		},
+		{
+			"name": "sol2",
+			"port": "1",
+			"type": "double",
+			"subsystem": "Drivetrain"
+		}
+	],
+	"hasPneumatics": "yes",
+	"hids": [
+		{
+			"name": "d1",
+			"port": "0",
+			"type": "joystick"
+		},
+		{
+			"name": "d2",
+			"port": "1",
+			"type": "xbox"
+		},
+		{
+			"name": "d3",
+			"port": "2",
+			"type": "ps"
+		}
+	],
+	"sensors": {
+		"analog": [
+			{
+				"name": "a1",
+				"port": "0",
+				"type": "gyro",
+				"subsystem": "sub2"
+			},
+			{
+				"name": "a2",
+				"port": "1",
+				"type": "accel",
+				"subsystem": "Drivetrain"
+			},
+			{
+				"name": "a3",
+				"port": "2",
+				"type": "pot",
+				"subsystem": "sub2"
+			}
+		],
+		"digital": [
+			{
+				"name": "lim1",
+				"port": "0",
+				"type": "switch",
+				"subsystem": "Drivetrain"
+			}
+		]
+	},
+	"subsystems": [
+		{
+			"name": "Drivetrain",
+			"actions": [
+				{
+					"text": "drive",
+					"xmlcode": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"procedures_defreturn\" id=\"2\" inline=\"false\" deletable=\"false\" x=\"213\" y=\"98\">\n    <mutation procname=\"drive\"></mutation>\n  </block>\n</xml>",
+					"isDone": true
+				},
+				{
+					"text": "stop",
+					"xmlcode": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"procedures_defreturn\" id=\"10\" inline=\"false\" deletable=\"false\" x=\"250\" y=\"100\">\n    <mutation procname=\"stop\"></mutation>\n  </block>\n</xml>",
+					"isDone": true
+				},
+				{
+					"text": "turn",
+					"xmlcode": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"procedures_defreturn\" id=\"19\" inline=\"false\" deletable=\"false\" x=\"250\" y=\"100\">\n    <mutation procname=\"turn\"></mutation>\n  </block>\n</xml>",
+					"isDone": true
+				}
+			],
+			"disabled": false,
+			"stateVars": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"state_vars\" id=\"18\" deletable=\"false\" x=\"250\" y=\"0\"></block>\n</xml>"
+		},
+		{
+			"name": "sub2",
+			"actions": [
+				{
+					"text": "fred",
+					"xmlcode": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"procedures_defreturn\" id=\"27\" inline=\"false\" deletable=\"false\" x=\"250\" y=\"100\">\n    <mutation procname=\"fred\"></mutation>\n  </block>\n</xml>",
+					"isDone": true
+				},
+				{
+					"text": "ted",
+					"xmlcode": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"procedures_defreturn\" id=\"36\" inline=\"false\" deletable=\"false\" x=\"250\" y=\"100\">\n    <mutation procname=\"ted\"></mutation>\n  </block>\n</xml>",
+					"isDone": true
+				}
+			],
+			"disabled": false,
+			"stateVars": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"state_vars\" id=\"35\" deletable=\"false\" x=\"250\" y=\"0\"></block>\n</xml>"
+		}
+	],
+	"commands": [
+		{
+			"name": "ArcadeDrive",
+			"requires": "Drivetrain",
+			"type": "cmd"
+		},
+		{
+			"name": "cmd2",
+			"requires": [],
+			"type": "cmd"
+		},
+		{
+			"name": "cmd3",
+			"requires": "Drivetrain",
+			"type": "cmd"
+		}
+	],
+	"curStep": 11,
+	"hasOtherMotors": "yes",
+	"hasDIN": "yes",
+	"hasAIN": "yes"
+}
