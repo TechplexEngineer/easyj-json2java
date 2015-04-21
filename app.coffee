@@ -82,7 +82,7 @@ files = [
 if data.hasDrivetrain == "yes"
 	dt = data.drivetrain
 
-	files[dt.subsystem] = {
+	files.push({
 		template: 'Subsystem.java'
 		parse: true,
 		out: "out/src/"+info.pkgarr.join('/')+"/subsystems/"+dt.subsystem+".java",
@@ -93,7 +93,7 @@ if data.hasDrivetrain == "yes"
 			controllers: dt.controllers,
 			methods: [],
 		}
-	}
+	});
 
 h = require("Handlebars")
 path = require("path")
@@ -136,11 +136,8 @@ copyFile = (infile, outfile) ->
 	fs.writeFileSync(outfile, out)
 
 
-
-
-# render("tpl/Robot.java", view, "out/package/Robot.java")
-
 for item in files
+	console.log(item.out)
 	if item.parse
 		render(path.join(templatedir, item.template), item.data, item.out)
 	else

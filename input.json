@@ -26,7 +26,7 @@
 		],
 		"numMotors": "4",
 		"type": "arcade",
-		"subsystem": "sub2"
+		"subsystem": "Drivetrain"
 	},
 	"controllers": [
 		{
