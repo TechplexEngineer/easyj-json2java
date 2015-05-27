@@ -11,6 +11,7 @@ info.pkgarr.push('t'+info.team_number)
 info.package = info.pkgarr.join('.')
 
 fs = require("fs")
+_ = require('lodash')
 
 file = fs.readFileSync(inputfile)
 data = JSON.parse(file)
@@ -34,7 +35,8 @@ files = [
 					name:"Regular Command",
 					command:"RegularAuto"
 				}
-			]
+			],
+			subsystems: _.pluck(data.subsystems, "name")
 		}
 	},{
 		template: 'JoystickAxisButton.java',
@@ -76,11 +78,26 @@ files = [
 		data: {
 			'package': info.package,
 		}
+	},{
+		template: 'build.properties',
+		parse: true,
+		out: 'out/build.properties',
+		data: {
+			'package': info.package,
+		}
 	}
 ]
 
+# Drivetrain @todo combine with subsys loop below
 if data.hasDrivetrain == "yes"
 	dt = data.drivetrain
+	subsys = _.where(data.subsystems, {"name": "Drivetrain"})
+	if subsys.length != 1
+		console.err("Multiply defined subystem:",dt.subsystem)
+	actions = subsys[0].actions
+	# console.log(actions)
+	sen = _.where(data.sensors.analog, {"subsystem": dt.subsystem})
+	sen = sen.concat(_.where(data.sensors.digital, {"subsystem": dt.subsystem}))
 
 	files.push({
 		template: 'Subsystem.java'
@@ -89,11 +106,49 @@ if data.hasDrivetrain == "yes"
 		data: {
 			package: info.package,
 			name: dt.subsystem,
-			sensors: [],
+			sensors: sen,
 			controllers: dt.controllers,
-			methods: [],
+			methods: actions,
+			solenoids: _.where(data.solenoids, {"subsystem": dt.subsystem})
 		}
 	});
+# Other subsystems:
+for sub in data.subsystems
+	if sub.name isnt "Drivetrain"
+		sen = _.where(data.sensors.analog, {"subsystem": sub.name})
+		sen = sen.concat(_.where(data.sensors.digital, {"subsystem": sub.name}))
+		files.push({
+			template: 'Subsystem.java'
+			parse: true,
+			out: "out/src/"+info.pkgarr.join('/')+"/subsystems/"+sub.name+".java",
+			data: {
+				package: info.package,
+				name: sub.name,
+				sensors: sen,
+				controllers: _.where(data.controllers, {"subsystem": sub.name}),
+				solenoids: _.where(data.solenoids, {"subsystem": sub.name})
+				methods: sub.actions,
+			}
+		})
+
+# Commands
+for cmd in data.commands
+	# console.log(cmd)
+	
+	if cmd.type == 'cmd'
+		files.push({
+				template: 'Command.java'
+				parse: true,
+				out: "out/src/"+info.pkgarr.join('/')+"/commands/"+cmd.name+".java",
+				data: {
+					package: info.package,
+					name: cmd.name,
+					req: cmd.requires
+				}
+			})
+
+# Auto Commands
+
 
 h = require("Handlebars")
 path = require("path")
@@ -135,6 +190,7 @@ copyFile = (infile, outfile) ->
 	mkdirp(dir)
 	fs.writeFileSync(outfile, out)
 
+console.log("Processing Files")
 
 for item in files
 	console.log(item.out)

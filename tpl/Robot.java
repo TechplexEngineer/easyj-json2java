@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.t5122.commands.*;
-import org.t5122.commands.auto.*;
-import org.t5122.subsystems.*;
-import org.usfirst.frc5122.Fred2.Robot;
+import {{package}}.commands.*;
+import {{package}}.commands.auto.*;
+import {{package}}.subsystems.*;
+
 
 
 /**
@@ -31,6 +31,13 @@ public class Robot extends IterativeRobot {
 	private SendableChooser autoChooser;
 	
 	//create static instances of subsystems here
+    {{#each subsystems}}
+    public static {{capFirst this}} s_{{this}};
+    {{else}}
+    // It looks like you haven't defined any subsystems. @todo
+    // Create static variables here so you can access them in your commands. Example:
+    // public static Drivetrain drive;
+    {{/each}}
 
     Command autonomousCommand;
 
@@ -44,6 +51,12 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		
 		// call the constructors of any subsystems which require parameters.
+        {{#each subsystems}}
+        s_{{this}} = new {{capFirst this}}();
+        {{else}}
+        // Since you haven't defined any sybsystems, we'll leave an example of calling the constructor:
+        // drive = new Drivetrain();
+        {{/each}}
         
         // OI must be constructed after subsystems. If the OI creates Commands 
         // (which it very likely will), subsystems are not guaranteed to be 
@@ -57,6 +70,11 @@ public class Robot extends IterativeRobot {
 
         {{#each autos}}
         autoChooser.add{{type}}("{{name}}", new {{command}}());
+        {{else}}
+        // It looks like you haven't defined any autonomous modes. @todo
+        // Here are some examples:
+        // autoChooser.addDefault("Default Command", new DefaultAuto()); //The default auto mode
+        // autoChooser.addObject("Regular Command", new RegularAuto());  //Another auto mode
         {{/each}}
 
         SmartDashboard.putData("Auto Chooser", autoChooser);

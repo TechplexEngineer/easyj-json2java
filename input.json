@@ -33,7 +33,7 @@
 			"name": "motor1",
 			"port": "4",
 			"type": "victor",
-			"subsystem": "Drivetrain"
+			"subsystem": "sub2"
 		},
 		{
 			"name": "motor2",
@@ -45,7 +45,7 @@
 			"name": "motor3",
 			"port": "6",
 			"type": "jaguar",
-			"subsystem": "Drivetrain"
+			"subsystem": "sub2"
 		},
 		{
 			"name": "motor4",
@@ -57,7 +57,7 @@
 			"name": "motor5",
 			"port": "8",
 			"type": "victorsp",
-			"subsystem": "Drivetrain"
+			"subsystem": "sub2"
 		}
 	],
 	"solenoids": [
@@ -98,13 +98,13 @@
 				"name": "a1",
 				"port": "0",
 				"type": "gyro",
-				"subsystem": "sub2"
+				"subsystem": "Drivetrain "
 			},
 			{
 				"name": "a2",
 				"port": "1",
 				"type": "accel",
-				"subsystem": "Drivetrain"
+				"subsystem": "sub2"
 			},
 			{
 				"name": "a3",
@@ -118,7 +118,7 @@
 				"name": "lim1",
 				"port": "0",
 				"type": "switch",
-				"subsystem": "Drivetrain"
+				"subsystem": "sub2"
 			}
 		]
 	},
