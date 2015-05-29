@@ -52,7 +52,8 @@ files = [
 		out: "out/src/"+info.pkgarr.join('/')+"/OI.java",
 		data: {
 			'package': info.package,
-			"hids": [
+			"hids": data.hids, 
+			old: [
 				{
 					"name": "d1",
 					"port": "0",
@@ -85,6 +86,18 @@ files = [
 		data: {
 			'package': info.package,
 		}
+	},{
+		template: '.classpath',
+		parse: false,
+		out:"out/.classpath",
+	},{
+		template: '.project',
+		parse: false,
+		out:"out/.project",
+	},{
+		template: 'build.xml',
+		parse: false,
+		out:"out/build.xml",
 	}
 ]
 
