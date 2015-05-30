@@ -16,6 +16,7 @@ _ = require('lodash')
 file = fs.readFileSync(inputfile)
 data = JSON.parse(file)
 
+# cam this is a change
 # templates to iterate through
 # this has the limitation that you can't have the same named classes in your project
 files = [
