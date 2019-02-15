@@ -4,7 +4,7 @@
   "description": "convert EasyJ-json to FRC Java",
   "main": "app.coffee",
   "dependencies": {
-    "handlebars": "^3.0.2",
+    "handlebars": "^4.0.13",
     "lodash": "^3.7.0",
     "mkdirp": "^0.5.0",
     "mustache": "^2.0.0"
